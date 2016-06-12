@@ -4,12 +4,16 @@
 # 1st howto: downlaod this rsc file 
 https://github.com/maspurmikrotiker/L2TP-IPSec-on-Mikrotik/blob/master/l2tp-ipsec.rsc
 > upload to your mikrotik ftp server (click Files menu from winbox and drag (l2tp-ipsec.rsc) from your downloads folder )
+#
 > click New Terminal and type: 
+#
 import l2tp-ipsec.rsc
+#
 > done!!! your vpn server is activated
 
 #2nd howto: simply copy-paste this code below into terminal
 > start from here
+#
 /ip pool
 add name=pool1 ranges=10.100.0.2-10.100.0.200
 
