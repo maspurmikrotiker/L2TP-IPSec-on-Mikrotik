@@ -7,12 +7,15 @@ https://github.com/maspurmikrotiker/L2TP-IPSec-on-Mikrotik/blob/master/l2tp-ipse
 #
 > click New Terminal and type: 
 #
+#
 import l2tp-ipsec.rsc
+#
 #
 > done!!! your vpn server is activated
 
 #2nd howto: simply copy-paste this code below into terminal
 > start from here
+#
 #
 /ip pool
 add name=pool1 ranges=10.100.0.2-10.100.0.200
