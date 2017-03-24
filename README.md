@@ -3,6 +3,7 @@
 # This is a script to run the vpn service using L2TP with ipsec in the MikroTik RouterOS
 # 1st howto: downlaod this rsc file 
 https://github.com/maspurmikrotiker/L2TP-IPSec-on-Mikrotik/blob/master/l2tp-ipsec.rsc
+untuk ROS versi 6 pakai yg ini https://github.com/maspurmikrotiker/L2TP-IPSec-on-Mikrotik/blob/master/l2tp-ros6.rsc
 > upload to your mikrotik ftp server (click Files menu from winbox and drag (l2tp-ipsec.rsc) from your downloads folder )
 #
 > click New Terminal and type: 
