@@ -1,0 +1,45 @@
+# Jasa setting Mikrotik
+# Purwanto +62 822 3348 3221
+#
+/ip ipsec proposal
+set [ find default=yes ] enc-algorithms=aes-256-cbc,3des
+/ip pool
+add name=pool1 ranges=10.16.32.1-10.16.35.254
+add name=pool2 ranges=10.64.128.1-10.64.159.254
+/ppp profile
+add change-tcp-mss=yes dns-server=8.8.8.8 local-address=pool1 name=\
+    profile-ppp only-one=yes remote-address=pool2 use-encryption=yes
+/interface l2tp-server server
+set default-profile=profile-ppp enabled=yes
+/interface pptp-server server
+set authentication=pap,chap,mschap1,mschap2 default-profile=profile-ppp \
+    enabled=yes
+/ip dhcp-client
+add disabled=no interface=ether1
+/ip dns
+set allow-remote-requests=yes
+/ip firewall filter
+add action=drop chain=input dst-port=22 protocol=tcp
+add action=accept chain=input comment="VPN Mikrotik" port=1701,500,4500 \
+    protocol=udp
+add action=accept chain=input dst-port=1701,500,4500 in-interface=ether1 \
+    protocol=udp
+add action=accept chain=output dst-port=1701,500,4500 protocol=udp
+add action=accept chain=input dst-port=1723 in-interface=ether1 protocol=tcp
+add action=accept chain=output dst-port=1723 protocol=tcp
+add action=accept chain=forward dst-address-list=speedtest
+/ip firewall nat
+add action=masquerade chain=srcnat out-interface=ether1
+add action=masquerade chain=srcnat dst-address=10.0.0.0/8
+/ip ipsec peer
+add address=0.0.0.0/0 exchange-mode=main-l2tp generate-policy=port-override \
+    secret=rahasia
+/ip service
+set telnet disabled=yes
+set ftp disabled=yes
+set ssh disabled=yes
+set api-ssl disabled=yes
+/system ntp client
+set enabled=yes primary-ntp=ntp.metrologi.lipi.go.id secondary-ntp=3.id.pool.ntp.org
+/system clock
+set time-zone-name=Asia/Jakarta
